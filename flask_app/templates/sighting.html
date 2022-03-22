@@ -1,0 +1,69 @@
+{%extends 'base.html'%}
+{%block main%}
+<div>
+    <h2>
+        {{output.location|title}} Sighting on {{output.seen}}
+    </h2>
+    <table>
+        <th colspan="2">
+            Sighting
+        </th>
+        <tr>
+            <td>
+                <b>
+                    What Happened
+                </b>
+            </td>
+            <td>
+                {{output.detail}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>
+                    # of Sasquaches
+                </b>
+            </td>
+            <td>
+                {{output.sas_num}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>
+                    Created By:
+                </b>
+            </td>
+            <td>
+                {{output.creator_id.last_name|title}}, {{output.creator_id.first_name|title}}
+            </td>
+        </tr>
+    </table>
+</div>
+<div>
+    <h2>
+        Skeptics {{output.holds|length}}
+    </h2>
+    {%if output.holds%}
+        {%for i in output.holds%}
+            {{i.last_name|title}}, {{i.first_name|title}} {{i.id}}
+            <br>
+        {%endfor%}
+    {%endif%}
+    {%if check%}
+        <br>
+        <a href="/skeptic/delete/{{session['logged_in']['id']}}/{{output.id}}">
+            Unbeleieve!
+        </a>
+    {%else%}
+        <form action="/skeptic/create" method="POST">
+            <!-- user_id -->
+            <input type="hidden" name="user_id" value="{{session['logged_in']['id']}}">
+            <!-- sighting_id -->
+            <input type="hidden" name="sighting_id" value="{{output.id}}">
+            <!-- submit -->
+            <input type="submit" value="Believe It!">
+        </form>
+    {%endif%}
+</div>
+{%endblock%}

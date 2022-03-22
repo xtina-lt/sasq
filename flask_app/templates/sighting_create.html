@@ -1,0 +1,38 @@
+{%extends 'base.html'%}
+{%block main%}
+    <div>
+        <h3>
+            Report a Sighting
+        </h3>
+        <form action="/sighting/create/process" method="POST">
+            <!-- location -->
+            <label for="location">
+                Sighting Location:
+            </label>
+            <input type="text" name="location" value="Washington" required>
+            <br>
+            <!-- detail -->
+            <label for="detail">
+                What Happened:
+            </label>
+            <textarea cols="5" rows="7" name="detail" required>Tell me what happened....</textarea>
+            <br>
+    </div>
+    <div>
+            <!-- seen-->
+            <label for="seen">
+                Date of Sighting:
+            </label> 
+            <input type="date" name="seen" required>
+            <!-- sas_num-->
+            <label for="sas_num">
+                Number of Sasquaches:
+            </label>
+            <input type="number" name="sas_num" required>
+            <!-- creator_id -->
+            <input type="hidden" name="creator_id" value="{{session['logged_in']['id']}}">
+            <!-- submit -->
+            <input type="submit" value="Caught Em!">
+        </form>
+    </div>
+{%endblock%}

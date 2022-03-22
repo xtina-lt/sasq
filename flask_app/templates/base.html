@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⛰️XTINA.CODES⛰️</title>
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed&family=Lobster&display=swap" rel="stylesheet">
+    <!-- STATIC FILES -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        {%if session['logged_in']%}
+            <div>
+                Sasquach Websighting
+            </div>
+            <div>
+                Hello {{session['logged_in']['last_name']|capitalize}}, {{session['logged_in']['first_name']|capitalize}}!
+            </div>
+        {%else%}
+            Sasquach Websighting
+        {%endif%}
+    </header>
+    <nav>
+        {% if not session['logged_in'] %}
+            <a href="/">
+                ⛰️Login/Register
+            </a>
+        {% else %}
+            <a href="/dashboard">
+                ⛰️Dashboard
+            </a>
+            <a href="/sighting/create">
+                ⛰️Report
+            </a>
+            <a href="/user/logout">
+                ⛰️Logout
+            </a>
+        {% endif %}
+    </nav>
+    <main>
+        {%block main%}
+        {%endblock%}
+    </main>
+</body>
+</html>

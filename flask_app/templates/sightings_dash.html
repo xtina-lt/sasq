@@ -1,0 +1,62 @@
+{%extends 'base.html'%}
+{%block main%}
+    {%if output%}
+        <div>
+        <h3>
+            Sightings:
+        </h3>
+        <table>
+            <th>
+                Skeptics
+            </th>
+            <th>
+                Information
+            </th>
+            <th>
+                Options
+            </th>
+            {% for i in output %}
+            <tr>
+                <td>
+                    Skeptics
+                    <br>
+                    {{i.holds|length}}
+                </td>
+                </td>
+                <td>
+                    {{i.location}} - {{i.seen}}
+                    <br>
+                    Reported By: {{i.creator_id.first_name}}
+                </td>
+                <td>
+                    <a href="/sighting/{{i.id}}">
+                        View
+                    </a>
+                    {% if session['logged_in']['id'] == i.creator_id.id %}
+                    <br>
+                    <a href='/sighting/{{i.id}}/update'>
+                        Edit
+                    </a>
+                    |
+                    <a href='/sighting/{{i.id}}/delete'>
+                        Delete
+                    </a>
+                    {% endif %}
+                </td>
+            </tr>
+            {%endfor%}
+            </table>
+        </div>
+    {%else%}
+        <div>
+            <h3>
+                Sightings:
+            </h3>
+            Try reporting a sighting
+            <br>
+            <span class="emoji">
+                ⛰️
+            </span>
+        </div>
+    {%endif%}
+{%endblock%}

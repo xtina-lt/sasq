@@ -1,0 +1,44 @@
+{%extends 'base.html'%}
+{%block main%}
+    <div>
+        <h3>
+            Change {{output.location|title}} Sighting
+        </h3>
+        <form action="/sighting/update/process" method="POST">
+            <!-- id -->
+            <input type="hidden" name="id" value="{{output.id}}">
+            <!-- location -->
+            <label for="location">
+                Sighting Location:
+            </label>
+            <input type="text" name="location" value="{{output.location}}" required>
+            <br>
+            <!-- detail -->
+            <label for="detail">
+                What Happened:
+            </label>
+            <textarea cols="5" rows="7" name="detail" required>{{output.detail}}</textarea>
+            <br>
+    </div>
+    <div>
+            <!-- seen-->
+            <label for="seen">
+                Date of Sighting:
+                <br>
+                {{output.seen}}
+            </label> 
+            <input type="date" name="seen" value="{{output.seen}}" required>
+            <!-- sas_num-->
+            <label for="sas_num">
+                Number of Sasquaches:
+                <br>
+                {{output.sas_num}}
+            </label>
+            <input type="number" name="sas_num" value="{{output.sas_num}}" required>
+            <!-- creator_id -->
+            <input type="hidden" name="creator_id" value="{{session['logged_in']['id']}}">
+            <!-- submit -->
+            <input type="submit" value="Change Me!">
+        </form>
+    </div>
+{%endblock%}
